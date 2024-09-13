@@ -70,12 +70,12 @@ let getUserInfoById = (userId) => {
 }
 
 let updateUserData = (data) => {
-    return new Promise(async(resolve, reject) => {
-        try{
+    return new Promise(async (resolve, reject) => {
+        try {
             let user = await db.User.findOne({
-                where: {id: data.id}
+                where: { id: data.id }
             })
-            if(user){
+            if (user) {
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
                 user.address = data.address;
@@ -83,11 +83,28 @@ let updateUserData = (data) => {
 
                 let allUsers = await db.User.findAll();
                 resolve(allUsers);
-            } else{
+            } else {
                 resolve();
             }
-        }catch(e){
+        } catch (e) {
             console.log(e);
+        }
+    })
+}
+
+let deleteUserById = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await db.User.findOne({
+                where: { id: userId }
+            })
+            if (user) {
+                await user.destroy();
+            }
+
+            resolve();
+        } catch (e) {
+            reject(e);
         }
     })
 }
@@ -97,5 +114,6 @@ module.exports = {
     getAllUser: getAllUser,
     getUserInfoById: getUserInfoById,
     updateUserData: updateUserData,
+    deleteUserById: deleteUserById,
 }
 

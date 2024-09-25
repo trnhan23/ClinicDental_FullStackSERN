@@ -106,7 +106,7 @@ let createNewUser = (data) => {
             if (checkEmail === true) {
                 resolve({
                     errCode: 1,
-                    message: 'Your email is already in used. Plz try another email!'
+                    errMessage: 'Your email is already in used. Plz try another email!'
                 })
             }
             else {
@@ -123,7 +123,7 @@ let createNewUser = (data) => {
                 })
                 resolve({
                     errCode: 0,
-                    message: 'ok'
+                    errMessage: 'ok'
                 })
             }
         } catch (e) {
@@ -156,7 +156,7 @@ let deleteUser = (userId) => {
 let updateUser = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if(!data.id){
+            if (!data.id) {
                 resolve({
                     errCode: 2,
                     errMessage: 'Missing required parameters'
